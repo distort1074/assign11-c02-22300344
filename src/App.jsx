@@ -37,6 +37,7 @@ function App() {
   return (
     <>
       <div className="flex h-screen w-full flex-col items-center justify-center bg-gray-800">
+        <h1 className="mb-4 text-center text-2xl font-bold text-white">오픈소스 과제 계산기</h1>
         <form className="flex w-full justify-center p-5">
           <input
             type="text"
