@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [result, setResult] = useState("");
@@ -30,49 +31,49 @@ function App() {
     });
   };
 
-  const buttonStyle = "bg-gray-500 text-white text-lg p-4 rounded-xl";
-  const buttonTopStyle =
-    "bg-[#A5A5A5] text-black font-bold text-2xl rounded-xl h-16";
-  const buttonLeftStyle = "bg-[#F89B10] font-extrabold rounded-xl text-white";
+  const buttonStyle = "calculator-button";
+  const buttonTopStyle = "calculator-button calculator-button-top";
+  const buttonLeftStyle = "calculator-button calculator-button-operator";
   return (
     <>
-      <div className="flex h-screen w-full flex-col items-center justify-center bg-gray-800">
+      <div className="calculator-page">
         <h1 className="mb-4 text-center text-2xl font-bold text-white">오픈소스 과제 계산기</h1>
-        <form className="flex w-full justify-center p-5">
+        <form className="calculator-form">
           <input
             type="text"
             value={result}
             readOnly
-            className="w-1/2 rounded-lg bg-black/40 p-2 text-right text-4xl font-bold text-white md:w-5/12 lg:w-3/12"
+            aria-label="계산식과 결과"
+            className="calculator-display"
           />
         </form>
 
-        <div className="grid grid-cols-4 gap-2 rounded-xl border bg-black p-6 shadow-md shadow-gray-400 lg:w-3/12">
+        <div className="calculator-keypad">
           <button
             name="clear"
             onClick={clear}
-            className={(buttonStyle, buttonTopStyle)}
+            className={buttonTopStyle}
           >
             AC
           </button>
           <button
             name="toggleSign"
             onClick={toggleSign}
-            className={(buttonStyle, buttonTopStyle)}
+            className={buttonTopStyle}
           >
             +/-
           </button>
           <button
             name="%"
             onClick={handleClick}
-            className={(buttonStyle, buttonTopStyle)}
+            className={buttonTopStyle}
           >
             %
           </button>
           <button
             name="/"
             onClick={handleClick}
-            className={(buttonStyle, buttonLeftStyle)}
+            className={buttonLeftStyle}
           >
             /
           </button>
@@ -88,7 +89,7 @@ function App() {
           <button
             name="*"
             onClick={handleClick}
-            className={(buttonStyle, buttonLeftStyle)}
+            className={buttonLeftStyle}
           >
             ×
           </button>
@@ -104,7 +105,7 @@ function App() {
           <button
             name="-"
             onClick={handleClick}
-            className={(buttonStyle, buttonLeftStyle)}
+            className={buttonLeftStyle}
           >
             -
           </button>
@@ -120,7 +121,7 @@ function App() {
           <button
             name="+"
             onClick={handleClick}
-            className={(buttonStyle, buttonLeftStyle)}
+            className={buttonLeftStyle}
           >
             +
           </button>
@@ -134,7 +135,7 @@ function App() {
           <button
             id="result"
             onClick={calculate}
-            className={`${buttonStyle} col-span-2 bg-[#F89B10] font-extrabold`}
+            className={`${buttonLeftStyle} col-span-2`}
           >
             =
           </button>
