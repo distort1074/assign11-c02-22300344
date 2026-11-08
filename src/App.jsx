@@ -3,10 +3,11 @@ import "./App.css";
 
 function App() {
   const [result, setResult] = useState("");
+  const [history, setHistory] = useState([]);
 
   const handleClick = (e) => {
     const value = e.target.name;
-    setResult(result.concat(value));
+    setResult((previous) => previous === "Error" ? value : previous + value);
   };
 
   const clear = () => {
@@ -14,9 +15,20 @@ function App() {
   };
 
   const calculate = () => {
+    if (result.trim() === "") return;
+
     try {
-      setResult(eval(result).toString());
-    } catch (err) {
+      const answer = eval(result);
+      if (!Number.isFinite(answer)) {
+        setResult("Error");
+        return;
+      }
+      setResult(String(answer));
+      setHistory((previous) => [
+        ...previous,
+        { expression: result, answer: String(answer) },
+      ]);
+    } catch {
       setResult("Error");
     }
   };
@@ -38,7 +50,7 @@ function App() {
     <>
       <div className="calculator-page">
         <h1 className="mb-4 text-center text-2xl font-bold text-white">오픈소스 과제 계산기</h1>
-        <form className="calculator-form">
+        <div className="calculator-form">
           <input
             type="text"
             value={result}
@@ -46,7 +58,7 @@ function App() {
             aria-label="계산식과 결과"
             className="calculator-display"
           />
-        </form>
+        </div>
 
         <div className="calculator-keypad">
           <button
@@ -140,6 +152,31 @@ function App() {
             =
           </button>
         </div>
+
+        <section className="calculator-history" aria-labelledby="history-title">
+          <div className="history-heading">
+            <h2 id="history-title">계산 기록</h2>
+            <button
+              className="history-clear"
+              onClick={() => setHistory([])}
+              disabled={history.length === 0}
+            >
+              기록 지우기
+            </button>
+          </div>
+          {history.length === 0 ? (
+            <p className="history-empty">계산하면 여기에 기록이 표시됩니다.</p>
+          ) : (
+            <ol className="history-list" aria-live="polite">
+              {history.map((item, index) => (
+                <li key={index}>
+                  <span>{item.expression} =</span>
+                  <strong>{item.answer}</strong>
+                </li>
+              ))}
+            </ol>
+          )}
+        </section>
       </div>
     </>
   );

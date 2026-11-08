@@ -55,3 +55,28 @@ body {
   gap: 8px;
   padding: 0 20px 24px;
 }
+
+.calculator-history {
+  margin-top: 24px;
+  padding: 18px;
+  border: 1px solid #555;
+  border-radius: 16px;
+  background: #2b2b2b;
+}
+
+.history-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.history-heading h2 { margin: 0; font-size: 18px; font-weight: 700; }
+.history-clear { color: #93c5fd; font-size: 13px; cursor: pointer; }
+.history-clear:disabled { color: #aaa; cursor: default; }
+.history-clear:focus-visible { outline: 2px solid #93c5fd; outline-offset: 3px; }
+.history-empty { margin: 14px 0 0; color: #bbb; font-size: 14px; }
+.history-list { max-height: 240px; overflow-y: auto; margin: 12px 0 0; padding: 0; list-style: none; }
+.history-list li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-top: 1px solid #444; overflow-wrap: anywhere; }
+.history-list li span, .history-list li strong { min-width: 0; }
+.history-list strong { color: #93c5fd; text-align: right; }
